@@ -29,12 +29,6 @@ jobs:
     - name: Generate zip deployment package
       run: |
         zip -r deploy.zip .
-    - name: Generate build number
-      uses: einaregilsson/build-number@v1 
-      with:
-        token: ${{secrets.github_token}}        
-    - name: Print new build number
-      run: echo Build number is $BUILD_NUMBER
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v1
       with:
