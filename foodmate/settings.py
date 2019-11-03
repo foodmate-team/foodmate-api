@@ -25,7 +25,7 @@ SECRET_KEY = '7^#%md2)oxtll2s3wcdj)!&2s9r)wc^ns2%v^ho-40!o)i^f+s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['foodmate-env.dte2xh2etr.eu-central-1.elasticbeanstalk.com']
 
 
 # Application definition
