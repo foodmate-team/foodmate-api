@@ -42,6 +42,6 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: foodmate
         environment_name: foodmate-env
-        version_label: ${{ steps.buildnumber.outputs.build_number }}
+        version_label: ${{ github.sha }}
         region: eu-central-1
         deployment_package: deploy.zip
