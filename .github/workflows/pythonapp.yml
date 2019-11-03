@@ -15,11 +15,9 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
-        curl -sL https://github.com/stedolan/jq/releases/latest/download/jq-linux64
-        -o /usr/local/bin/jq && chmod +x /usr/local/bin/jq
-        jq -r '.default | to_entries[] | .key + .value.version'
-        Pipfile.lock > requirements.txt
         python -m pip install --upgrade pip
+        pip install pipenv
+        pipenv lock -r > requirements.txt
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
@@ -28,7 +26,19 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pip install pytest
-        pytest
+    - name: Generate build number
+      uses: einaregilsson/build-number@v1 
+      with:
+        token: ${{secrets.github_token}}        
+    - name: Print new build number
+      run: echo Build number is $BUILD_NUMBER
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v1
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: foodmate
+        environment_name: foodmate-env
+        version_label: ${{ steps.buildnumber.outputs.build_number }}
+        region: eu-central-1
+        deployment_package: deploy.zip
