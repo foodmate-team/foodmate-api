@@ -25,7 +25,8 @@ SECRET_KEY = '7^#%md2)oxtll2s3wcdj)!&2s9r)wc^ns2%v^ho-40!o)i^f+s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['foodmate-env.dte2xh2etr.eu-central-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
+                 'foodmate-env.dte2xh2etr.eu-central-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'foodmate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'dbmasteruser',
+        'PASSWORD': 'A<e6ZyMf|[ladt{%cH$O(RH~t5rRETM,',
+        'HOST': 'ls-53256bb7987cfbe014e75b21f0a9c7573a7432b8.c6sryiml0uwt.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
