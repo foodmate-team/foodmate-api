@@ -13,11 +13,11 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
+    - name: Pipenv for Github Actions
+    - uses: VaultVulp/action-pipenv@v1.0.0
     - name: Install dependencies
       run: |
-        curl -sL https://github.com/stedolan/jq/releases/latest/download/jq-linux64
-        -o /usr/local/bin/jq && chmod +x /usr/local/bin/jq
-        jq -r '.default | to_entries[] | .key + .value.version'
+        pipenv lock -r > requirements.txt
         Pipfile.lock > requirements.txt
         python -m pip install --upgrade pip
         pip install -r requirements.txt
