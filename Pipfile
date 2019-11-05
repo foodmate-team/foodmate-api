@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
+social-auth-app-django = "*"
 
 [requires]
 python_version = "3.6"
