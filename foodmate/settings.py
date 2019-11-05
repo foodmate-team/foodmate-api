@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     '18.185.43.34', # aws elastic ip
     'foodmate-env.dte2xh2etr.eu-central-1.elasticbeanstalk.com', # elascti beanstalk address
     'food-mate.ru',
+    '*.food-mate.ru',
  ]
 
 
