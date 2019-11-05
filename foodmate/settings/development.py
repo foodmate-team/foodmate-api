@@ -1,0 +1,1 @@
+from foodmate.settings.common import *
