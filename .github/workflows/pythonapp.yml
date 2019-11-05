@@ -20,6 +20,7 @@ jobs:
         pipenv lock -r > requirements.txt
         pip install -r requirements.txt
         python manage.py collectstatic
+        printf 'yes\ny\ny\n' | python manage.py collectstatic
     - name: Lint with flake8
       run: |
         pip install flake8
