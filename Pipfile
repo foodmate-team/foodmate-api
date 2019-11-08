@@ -11,6 +11,8 @@ djangorestframework = "*"
 psycopg2-binary = "*"
 social-auth-app-django = "*"
 django-health-check = "*"
+rest-social-auth = "*"
+django-rest-knox = "*"
 
 [requires]
 python_version = "3.6"
