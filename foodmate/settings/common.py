@@ -52,9 +52,13 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',  # only if you use token authentication
-    'social_django',  # django social auth
-    'rest_social_auth',
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2',
     'knox',  # Only if you use django-rest-knox
+
+    'users.apps.UsersConfig',
+    'chefs.apps.ChefsConfig',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +106,17 @@ DATABASES = {
     }
 }
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIA3TQVYDYZZABKYPKH'
+
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'food-mate-images'
+
+AWS_DEFAULT_ACL = 'bucket-owner-full-control'
+
+AUTH_USER_MODEL = 'users.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -126,13 +141,19 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '045c3aaf40e0f5eb6c197c801840463e'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', ]  # optional
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}  # optional
 
+SOCIAL_AUTH_INSTAGRAM_KEY = SOCIAL_AUTH_FACEBOOK_KEY
+SOCIAL_AUTH_INSTAGRAM_SECRET = SOCIAL_AUTH_FACEBOOK_SECRET
+
+SOCIAL_AUTH_VK_OPENAPI_APP_ID = '7203009'
+
 AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.open_id.OpenIdAuth',
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.instagram.InstagramOAuth2',
 )
 
 SOCIAL_AUTH_PIPELINE = (

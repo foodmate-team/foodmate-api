@@ -18,12 +18,11 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('health/', include("health_check.urls")),
+    path('health/', include('health_check.urls')),
 
-    path('', include('social_django.urls', namespace='social')),
-    path('api/login/', include('rest_social_auth.urls_session')),
-    path('api/login/', include('rest_social_auth.urls_token')),
-    path('api/login/', include('rest_social_auth.urls_jwt_pair')),
-    path('api/login/', include('rest_social_auth.urls_jwt_sliding')),
-    path('api/login/', include('rest_social_auth.urls_knox')),
+    # it was maybe already added
+    # path('', include('social_django.urls', namespace='social_django')),
+
+    path('auth/', include('users.urls')),
+    path('chefs/', include('chefs.urls')),
 ]
