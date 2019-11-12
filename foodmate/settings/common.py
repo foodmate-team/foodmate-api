@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from .secrets import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,9 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7^#%md2)oxtll2s3wcdj)!&2s9r)wc^ns2%v^ho-40!o)i^f+s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -108,14 +106,6 @@ DATABASES = {
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = 'AKIA3TQVYDYZZABKYPKH'
-
-AWS_SECRET_ACCESS_KEY = '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'
-
-AWS_STORAGE_BUCKET_NAME = 'food-mate-images'
-
-AWS_DEFAULT_ACL = 'bucket-owner-full-control'
-
 AUTH_USER_MODEL = 'users.User'
 
 # Password validation
@@ -136,15 +126,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '529367117896260'
-SOCIAL_AUTH_FACEBOOK_SECRET = '045c3aaf40e0f5eb6c197c801840463e'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', ]  # optional
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}  # optional
-
-SOCIAL_AUTH_INSTAGRAM_KEY = SOCIAL_AUTH_FACEBOOK_KEY
-SOCIAL_AUTH_INSTAGRAM_SECRET = SOCIAL_AUTH_FACEBOOK_SECRET
-
-SOCIAL_AUTH_VK_OPENAPI_APP_ID = '7203009'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

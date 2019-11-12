@@ -26,7 +26,7 @@ class Chef(User):
 
     def get_median_price(self):
         prices = map(lambda m: m.price,
-                     self.menu_items)
+                     self.menu_items.all())
 
         return median(prices)
 

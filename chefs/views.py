@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from django.views import View
 import json
 from django.views.decorators.http import require_GET
@@ -17,18 +17,23 @@ def get_collection(request):
         if req['subway']:
             chefs = chefs.filter(subway=req['subway'])
 
-    res = map(map_chef, chefs)
+    mapped = list(map(map_chef, chefs))
 
-    return HttpResponse(res)
+    res = {
+        'items': mapped,
+        'count': len(mapped)
+    }
+
+    return JsonResponse(res)
 
 
 def map_chef(c):
     return {
-        'chef_id': c.id,
+        'id': c.user_id,
         'fullname': c.get_full_name(),
         'distance_from_subway': c.ditance_from_subway,
         'median_price': c.get_median_price(),
-        'avatar_url': c.user.avatar
+        'avatar_url': ''  # c.user.avatar.url
     }
 
 
@@ -36,7 +41,7 @@ class Index(View):
     def get(self, request, user_id):
         chef = get_object_or_404(Chef, user_id=user_id)
 
-        return HttpResponse(map_chef(chef))
+        return JsonResponse(map_chef(chef))
 
     def put(self, request, user_id):
         if not request.body:
@@ -49,7 +54,7 @@ class Index(View):
         edit_if_exists(chef, req, 'last_name')
         edit_if_exists(chef, req, 'subway')
         edit_if_exists(chef, req, 'address')
-        edit_if_exists_d(chef, req, 'avatar_url', 'avatar')
+        #  edit_if_exists_d(chef, req, 'avatar_url', 'avatar.url')
         edit_if_exists(chef, req, 'inst_token')
 
         # edit socials
@@ -73,7 +78,7 @@ class Index(View):
                 menu_item.price = m.price
 
         chef.save()
-        return HttpResponse()
+        return JsonResponse()
 
     @staticmethod
     def map_chef(c: Chef):
@@ -91,7 +96,7 @@ class Index(View):
             'subway': c.subway,
             'distance_from_subway': c.ditance_from_subway,
             'address': c.address,
-            'avatar_url': c.avatar,
+            'avatar_url': '',  # c.avatar.url,
             'social': {
                 'fb': c.contact_fb,
                 'ok': c.contact_ok,
