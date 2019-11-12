@@ -21,6 +21,8 @@ jobs:
         pip install -r requirements.txt
         python manage.py collectstatic
         printf 'yes\ny\ny\n' | python manage.py collectstatic
+      env:
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     - name: Lint with flake8
       run: |
         pip install flake8
