@@ -15,6 +15,7 @@ django-rest-knox = "*"
 django-rest-framework-social-oauth2 = "*"
 django-storages = "*"
 pillow = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.6"

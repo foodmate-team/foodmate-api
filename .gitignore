@@ -82,7 +82,7 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-.env
+foodmate/settings/.env
 .venv
 env/
 venv/
@@ -106,7 +106,3 @@ venv.bak/
 
 # vscode
 .vscode/
-
-# file with secret keys
-foodmate/settings/secrets.py
-foodmate/settings/secretkey.txt
