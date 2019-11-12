@@ -12,7 +12,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import environ
 env = environ.Env(
-    DEBUG=(bool, True)
+    DEBUG=(bool, True),
+    AWS_ACCESS_KEY_ID=(str, 'DEFAULT'),
+    AWS_SECRET_ACCESS_KEY=(str, 'DEFAULT'),
+    AWS_STORAGE_BUCKET_NAME=(str, 'DEFAULT'),
+    AWS_DEFAULT_ACL=(str, 'DEFAULT'),
+    SOCIAL_AUTH_FACEBOOK_KEY=(str, 'DEFAULT'),
+    SOCIAL_AUTH_FACEBOOK_SECRET=(str, 'DEFAULT'),
+    SOCIAL_AUTH_VK_OPENAPI_APP_ID=(str, 'DEFAULT'),
 )
 # reading .env file
 environ.Env.read_env()
